@@ -1,6 +1,5 @@
 package test1;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -14,27 +13,25 @@ public class PTIT016D {
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
         int k = input.nextInt();
-        long a[] = new long[n];
-        for (int i = 0; i < n; i++) {
+        long[] a = new long[n];
+        long[] b = new long[n-1];
+        a[0]=input.nextInt();
+        for (int i = 1; i < n; i++) {
             a[i] = input.nextInt();
+            b[i-1] = a[i];
         }
-        System.out.println(gt(a, n, k));
-
+        Arrays.sort(b);
+        System.out.println(tinh(b, n, k,a[0]));
     }
 
-    public static long gt(long a[], int n, int k) {
-        // trả về một mảng sau khi đã sắp xếp
-        System.out.println(n);
-        System.out.println(k);
-        Arrays.sort(a);
-        long tong = a[0];
-        int dauTru = n - k - 1;
-        for (int i = 1; i < dauTru + 1; i++) {
-            tong -= a[i];
+    public static long tinh(long[] a, int n, int k,long kq) {
+        k=n-k-1;
+        for(int i=0;i<k;i++){
+            kq-=a[i];
         }
-        for (int j = dauTru +1; j < n; j++) {
-            tong += a[j];
+        for(int j=k;j<n-1;j++){
+            kq+=a[j];
         }
-        return tong;
+        return kq;
     }
 }
